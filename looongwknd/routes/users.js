@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var personList = [];
+var empList = [];
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -11,8 +11,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/post', function(req, req, next)
 {
-  var person = new Person(req.body.username, req.body.password);
-  personList.push(person);
+  var empList = new Person(req.body.name, req.body.hours);
+  empList.push(emp);
   res.send(req);
 })
 
