@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
-
+//comment hello
 // Create a new user
 const createUser = async (req, res, next) => {
     const errors = validationResult(req);
