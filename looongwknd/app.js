@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose")
 const usersRoutes = require("./routes/users-routes");
+const indexroute = require("./routes/index");
 const app = express();
 
 app.use(bodyParser.json());
@@ -11,7 +12,7 @@ app.get('/', (req, res) => {
     res.json({message: "API is running"});
 });
 
-
+app.user('/home', indexroute);
 app.use("/api/users", usersRoutes);
 
 //This function will handle errors.

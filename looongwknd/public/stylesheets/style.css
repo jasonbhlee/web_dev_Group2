@@ -1,6 +1,15 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: linear-gradient(lightblue, rgb(255, 48, 255))
+}
+
+h1 {
+  color: black;
+}
+
+p {
+  color:black
 }
 
 a {
