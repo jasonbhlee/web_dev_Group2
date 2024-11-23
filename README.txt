@@ -1,4 +1,4 @@
-- Make sure you pull before working on the project.
+- Make sure you pull before working on the project, and Pull before pushing any changes.
 
 - Message Teams chat to let team know which files you are currently working on; to prevent merge conflicts.
 
