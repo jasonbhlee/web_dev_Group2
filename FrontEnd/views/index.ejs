@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-//This includes the header into the view
-    <%- include('/partials/header') %>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to Looong Wknd %></p>
-    
-    
-  </body>
+<html lang="en">
+<head>
+  <title>Four Day Work Week</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+  <%- include('./partials/header.ejs') %>
+  <div class="homepage">
+    <h1>Four Day Work Week</h1>
+    <table class="schedule">
+      <thead>
+        <tr>
+          <th>S</th>
+          <th>M</th>
+          <th>T</th>
+          <th>W</th>
+          <th>T</th>
+          <th>F</th>
+          <th>S</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="inactive">X</td>
+          <td class="inactive">X</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="inactive">X</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
 </html>

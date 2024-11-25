@@ -1,17 +1,108 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: linear-gradient(lightblue, rgb(255, 48, 255))
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ccc;
 }
 
-h1 {
-  color: black;
+.header__logo {
+  height: 50px;
 }
 
-p {
-  color:black
+.header__nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
 }
 
-a {
-  color: #00B7FF;
+.homepage {
+  text-align: center;
+  padding: 2rem;
 }
+
+.schedule {
+  margin: 2rem auto;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+.schedule th,
+.schedule td {
+  border: 1px solid #333;
+  padding: 1rem;
+  text-align: center;
+}
+
+.inactive {
+  color: red;
+  font-weight: bold;
+  text-decoration: line-through;
+}
+
+.registration {
+  width: 60%;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.registration-form input,
+.registration-form button {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: #00b7ff;
+}
+
+.signin {
+  width: 40%;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.signin-form input,
+.signin-form button {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.projects {
+  text-align: center;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem auto;
+}
+
+.project {
+  background: lightblue;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+

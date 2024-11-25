@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <%- include('/partials/header.ejs') %>
-  </head>
-  <body>
-	//Sign in (somewhat working)
-    <h1><%= title %></h1>
-    <input type="text" id="userid">
-    <input type="text" id="password">
-    <button type="submit" onClick=res.render(index)> </button>
-    <button type="submit"> </button>
-
-
-  </body>
+<html lang="en">
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+    <div class="signin">
+        <h2>Sign In</h2>
+        <form action="/signin" method="POST" class="signin-form">
+            <label for="userId">User ID:</label>
+            <input type="text" name="userId" id="userId" required />
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required />
+            <button type="submit">Enter</button>
+        </form>
+    </div>
+</body>
 </html>

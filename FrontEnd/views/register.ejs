@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <%- include('/partials/header') %>
-  </head>
-  <body>
-    <h1><%= title %></h1>
-	//A paragraph and multiple input textfields and two buttons one attempts to render the home screen and other creates the account
-    <p>Long Weekend %></p>
-    <input type="text" id="firstname">
-    <input type="text" id="lastname">
-    <input type="text" id="id">
-    <input type="text" id="email">
-    <input type="text" id="password">
-    <button type="submit" onClick=res.render(index)> </button>
-    <button type="submit" onClick=createUser> </button>
-
-  </body>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+    <div class="registration">
+        <h2>Registration</h2>
+        <form action="/api/users/create" method="POST" class="registration-form">
+            <label for="firstName">First Name:</label>
+            <input type="text" name="userFirstName" id="firstName" required />
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="userLastName" id="lastName" required />
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required />
+            <label for="userId">User ID:</label>
+            <input type="text" name="userId" id="userId" required />
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required />
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</body>
 </html>
