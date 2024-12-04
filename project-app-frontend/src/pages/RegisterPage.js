@@ -1,17 +1,51 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function RegisterPage() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const history = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Registration Data:', formData);
+
+    // Prepare the data to send to the backend
+    const userData = {
+      userFirstName: formData.name,  // Mapping form field to backend fields
+      userLastName: '', // You could extend the form to accept last name too
+      email: formData.email,
+      userId: formData.email, // You could add a separate field for userId
+      password: formData.password,
+    };
+
+    try {
+      // Send data to the backend
+      const response = await fetch('http://localhost:8080/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Registration failed');
+      }
+
+      // If registration is successful, redirect to the sign-in page
+      alert('Registration successful!');
+      history.push('/'); // Redirect to sign-in page
+
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('Registration failed: ' + error.message);
+    }
   };
 
   return (
