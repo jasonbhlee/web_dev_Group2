@@ -2,82 +2,76 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 function RegisterPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  // State to store the form data
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const history = useHistory();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  // Function to handle form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    // Prepare the data to send to the backend
-    const userData = {
-      userFirstName: formData.name,  // Frontend 'name' maps to 'userFirstName'
-      email: formData.email,
-      password: formData.password,
+    // Create a user object to send to the backend
+    const user = {
+      userFirstName: name,
+      email: email,
+      password: password,
     };
-  
+
     try {
-      // Send data to the backend
+      // Send the user data to the backend
       const response = await fetch('/api/users', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
       });
-  
+
       const result = await response.json();
-  
+
       if (!response.ok) {
         throw new Error(result.message || 'Registration failed');
       }
-  
-      // If registration is successful, redirect to the sign-in page
+
+      // Show a success message and redirect to the Sign-In page
       alert('Registration successful!');
-      history.push('/'); // Redirect to sign-in page
-  
+      history.push('/'); // Redirect to Sign-In
     } catch (error) {
-      console.error('Error during registration:', error);
-      alert('Registration failed: ' + error.message);
+      alert('Registration failed: ' + error.message); // Show error message
     }
   };
-  
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h2>Register</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'inline-block', textAlign: 'left' }}>
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          style={{ display: 'block', marginBottom: '10px' }}
-        />
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          style={{ display: 'block', marginBottom: '10px' }}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          style={{ display: 'block', marginBottom: '10px' }}
-        />
+      <form onSubmit={handleSubmit} style={{ textAlign: 'left', display: 'inline-block' }}>
+        <div style={{ marginBottom: '10px' }}>
+          <label>Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)} // Update name state
+            required
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} // Update email state
+            required
+          />
+        </div>
+        <div style={{ marginBottom: '10px' }}>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} // Update password state
+            required
+          />
+        </div>
         <button type="submit">Register</button>
       </form>
       <p>

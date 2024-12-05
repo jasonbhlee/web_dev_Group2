@@ -4,14 +4,17 @@ import { Link } from 'react-router-dom';
 function SignInPage() {
   const [formData, setFormData] = useState({ email: '', password: '' });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // Handle input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
     console.log('Sign-In Data:', formData);
+    alert('Sign-in form submitted');
   };
 
   return (
@@ -39,7 +42,7 @@ function SignInPage() {
         <button type="submit">Sign In</button>
       </form>
       <p>
-        Don't have an account? <Link to="/register">Register</Link>
+        Don't have an account? <Link to="/register" style={{ textDecoration: 'none' }}>Register</Link>
       </p>
     </div>
   );

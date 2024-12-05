@@ -3,7 +3,7 @@ const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
 
-// Create a new user (no hashing)
+// Create a new user (Registration)
 const createUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
