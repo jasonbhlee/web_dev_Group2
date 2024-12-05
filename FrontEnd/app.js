@@ -47,15 +47,17 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
+
 mongoose
-  .connect(
-    "mongodb+srv://jasonbhlee:zVUALKzoveu1a3Dv@userdata.yssqq.mongodb.net/?retryWrites=true&w=majority&appName=UserData"
-  )
+  .connect('mongodb+srv://jasonbhlee:zVUALKzoveu1a3Dv@userdata.yssqq.mongodb.net/?retryWrites=true&w=majority&appName=UserData')
   .then(() => {
     app.listen(8080, () => {
       console.log("Server is running on port 8080");
     });
   })
-  .catch((err) => {
+  .catch(err => {
     console.log(err);
   });
+
+
+ 

@@ -12,41 +12,40 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Prepare the data to send to the backend
     const userData = {
-      userFirstName: formData.name,  // Mapping form field to backend fields
-      userLastName: '', // You could extend the form to accept last name too
+      userFirstName: formData.name,  // Frontend 'name' maps to 'userFirstName'
       email: formData.email,
-      userId: formData.email, // You could add a separate field for userId
       password: formData.password,
     };
-
+  
     try {
       // Send data to the backend
-      const response = await fetch('http://localhost:8080/api/users', {
+      const response = await fetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),
       });
-
+  
       const result = await response.json();
-
+  
       if (!response.ok) {
         throw new Error(result.message || 'Registration failed');
       }
-
+  
       // If registration is successful, redirect to the sign-in page
       alert('Registration successful!');
       history.push('/'); // Redirect to sign-in page
-
+  
     } catch (error) {
       console.error('Error during registration:', error);
       alert('Registration failed: ' + error.message);
     }
   };
+  
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>

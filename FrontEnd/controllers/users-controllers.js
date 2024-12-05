@@ -1,8 +1,7 @@
 const { validationResult } = require('express-validator');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
-//comment hello
-// Create a new user
+//comment hello// Create a new user
 const createUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -10,40 +9,38 @@ const createUser = async (req, res, next) => {
         return next(new HttpError('Invalid inputs, please check your info.', 422));
     }
 
-    const { userFirstName, userLastName, email, userId, password } = req.body;
+    const { userFirstName, email, password } = req.body; // Match the frontend fields
 
     try {
+        // Check if the email already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return next(new HttpError('User already exists with this email.', 422));
         }
 
-        const existingUserId = await User.findOne({ userId });
-        if (existingUserId) {
-            return next(new HttpError('User ID already exists. Choose a different one.', 422));
-        }
-
+        // Create a new user
         const newUser = new User({
             userFirstName,
-            userLastName,
             email,
-            userId,
             password
         });
 
         await newUser.save();
 
+        // Prepare the response
         const responseUser = newUser.toObject({ getters: true });
         delete responseUser._id;
         delete responseUser.__v;
         delete responseUser.password;
 
+        // Respond with the newly created user
         res.status(201).json({ user: responseUser });
     } catch (err) {
         const error = new HttpError('Creating user failed, please try again later.', 500);
         return next(error);
     }
 };
+
 
 
 // Get all users

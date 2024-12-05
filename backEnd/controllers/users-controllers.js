@@ -2,48 +2,45 @@ const { validationResult } = require('express-validator');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
-// Create a new user
+
+
+// Create a new user (no hashing)
 const createUser = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors.array());
-        return next(new HttpError('Invalid inputs, please check your info.', 422));
+      console.log(errors.array());
+      return next(new HttpError('Invalid inputs, please check your info.', 422));
     }
 
-    const { userFirstName, userLastName, email, userId, password } = req.body;
+    const { userFirstName, email, password } = req.body;
 
     try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return next(new HttpError('User already exists with this email.', 422));
-        }
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return next(new HttpError('User already exists with this email.', 422));
+      }
 
-        const existingUserId = await User.findOne({ userId });
-        if (existingUserId) {
-            return next(new HttpError('User ID already exists. Choose a different one.', 422));
-        }
+      const newUser = new User({
+        userFirstName,
+        email,
+        password  // Store password as plaintext
+      });
 
-        const newUser = new User({
-            userFirstName,
-            userLastName,
-            email,
-            userId,
-            password
-        });
+      await newUser.save();
 
-        await newUser.save();
+      const responseUser = newUser.toObject({ getters: true });
+      delete responseUser._id;
+      delete responseUser.__v;
+      delete responseUser.password;
 
-        const responseUser = newUser.toObject({ getters: true });
-        delete responseUser._id;
-        delete responseUser.__v;
-        delete responseUser.password;
-
-        res.status(201).json({ user: responseUser });
+      res.status(201).json({ user: responseUser });
     } catch (err) {
-        const error = new HttpError('Creating user failed, please try again later.', 500);
-        return next(error);
+      const error = new HttpError('Creating user failed, please try again later.', 500);
+      return next(error);
     }
 };
+
+exports.createUser = createUser;
 
 
 // Get all users
