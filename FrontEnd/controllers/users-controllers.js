@@ -76,6 +76,27 @@ const getUsersByFirstName = async (req, res, next) => {
     }
 };
 
+const addProjectToAUser = async (req, res, next) => {
+    const project = req.params.user;
+
+    try {
+        const updatedUser = await User.findOneAndUpdate({user}, 'project');
+
+        res.status(200).json({
+            user:
+            {
+                projects: req.params.project
+            }
+        });
+
+        }
+
+    catch (err) {
+        var this_error = new HttpError("Unsuccessful.", 500);
+        return next(error);
+    }
+}
+
 
 // Get users by last name
 const getUsersByLastName = async (req, res, next) => {
@@ -193,6 +214,7 @@ const deleteUser = async (req, res, next) => {
 
 exports.getAllUsers = getAllUsers
 exports.getUsersByFirstName = getUsersByFirstName
+exports.addProjectToAUser = addProjectToAUser
 exports.getUsersByLastName = getUsersByLastName
 exports.getUserByEmail = getUserByEmail
 exports.getUsersByUserId = getUsersByUserId
