@@ -36,6 +36,15 @@ router.patch(
 
 
 router.patch('/id/:userId', usersControllers.updateUser);
+
+router.delete(
+    '/deletemyacc',
+    [
+      check('email').not().isEmpty().withMessage("Please put in your email")
+    ],
+    usersControllers.deleteUser
+  )
+  
 router.delete('/delete/:userId', usersControllers.deleteUser);
 
 module.exports = router;
